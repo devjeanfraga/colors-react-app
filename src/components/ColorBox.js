@@ -3,8 +3,20 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import './ColorBox.css';
 
 export default class ColorBox  extends Component {
+  constructor (props) {
+    super(props);
+    this.state = { copied: false };
+    this.changeCopyState = this.changeCopyState.bind(this);
+  }
+  
+  changeCopyState () {
+    this.setState({copied: true});
+    setTimeout(() => this.setState({copied: false}), 1500);
+  };
+
   render () {
     const {background, name} = this.props;
+    const { copied } = this.state;
     return (
       /*
         ColorBox  contains an unique color, 
@@ -22,17 +34,25 @@ export default class ColorBox  extends Component {
         //copy the text inse the text field
         navigator.clipboard.writeText(copyText.value); 
       */ 
-     <CopyToClipboard text={background}>
+     <CopyToClipboard text={background} onCopy={this.changeCopyState}>
       <div className="ColorBox" style={{ background: background }}>
+
+        <div style={{background}} className={`copy-overlay ${copied && "show"}`}/>
+
+        <div className= {`copy-msg ${copied && "show"}`}>
+        <h1>COPIED!</h1>
+        <p>{background}</p>
+        </div>
         <div className="copy-container">
           <div className="box-content">
             <span>{name}</span>
           </div>
           <button className="copy-button">Copy</button>
         </div>
+
         <span className="see-more">MORE</span>
       </div>
      </CopyToClipboard>
     );
-  };
+  }; 
 };
