@@ -3,9 +3,9 @@ import { withStyles} from "@material-ui/styles"
 
 const styles = {
   root: {
-    brackgroundColor: "white",
+    backgroundColor: "#ffff",
     border: "1px solid black",
-    boderRadious: "5px",
+    borderRadius: "5px",
     padding: "0.5rem", 
     position: "relative",
     overflow: "hidden",
@@ -14,7 +14,7 @@ const styles = {
     }
   },
   colors: {
-    brackgroundColor: "grey"
+    backgroundColor: "grey"
   },
   title: {
     display: "flex",
