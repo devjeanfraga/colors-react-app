@@ -16,8 +16,9 @@ export default class ColorBox  extends Component {
   };
 
   render () {
-    const {background, name} = this.props;
+    const {background, name, moreUrl} = this.props;
     const { copied } = this.state;
+    console.log(moreUrl)
     return (
       /*
         ColorBox  contains an unique color, 
@@ -51,7 +52,7 @@ export default class ColorBox  extends Component {
           <button className="copy-button">Copy</button>
         </div>
         {/* Como toda boxColor está configurada para copiar a cor, o stopPropagation evita que o evento a */}
-        <Link to={`/`} onClick={(e)=> e.stopPropagation() }>
+        <Link to={moreUrl} onClick={(e)=> e.stopPropagation() }>
           <span className="see-more">MORE</span>
         </Link>
       </div>

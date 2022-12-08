@@ -3,6 +3,7 @@ import seedColors from "./seed-colors";
 import Palette from "./components/Palette";
 import {generatePalette} from "./colorHelpers";  
 import PaletteList from "./components/PaletteList";
+import SingleColorPalette from "./components/SingleColorPalette";
 
 
 function App() {
@@ -16,13 +17,13 @@ function App() {
       <Route exact path="/" render={(routeProps) => <PaletteList palettes={seedColors} {...routeProps}/>} />
       <Route 
         exact 
-        path="/palette/:id" 
-        render={(routeProps) => (<Palette palette={generatePalette(findPalette(routeProps.match.params.id))}/>)} 
+        path="/palette/:paletteId" 
+        render={(routeProps) => (<Palette palette={generatePalette(findPalette(routeProps.match.params.paletteId))}/>)} 
       />
       <Route 
         exact 
         path="/palette/:paletteId/:colorId" 
-        render={() => (<h1>Single Color Page</h1>)} 
+        render={() => <SingleColorPalette/>} 
       />
     </Switch>
     
