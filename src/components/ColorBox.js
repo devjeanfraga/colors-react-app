@@ -16,10 +16,39 @@ export default class ColorBox  extends Component {
   };
 
   render () {
-    const {background, name, moreUrl} = this.props;
+    const { background, name, moreUrl, showLink } = this.props;
     const { copied } = this.state;
-    console.log(moreUrl)
+    const linkMore = () => (
+      <Link to={moreUrl} onClick={(e)=> e.stopPropagation() }>
+      <span className="see-more">MORE</span>
+      </Link>
+    );
+
     return (
+
+     <CopyToClipboard text={background} onCopy={this.changeCopyState}>
+      <div className="ColorBox" style={{ background: background }}>
+        <div style={{background}} className={`copy-overlay ${copied && "show"}`}/>
+
+        <div className= {`copy-msg ${copied && "show"}`}>
+        <h1>COPIED!</h1>
+        <p>{background}</p>
+        </div>
+
+        <div className="copy-container">
+          <div className="box-content">
+            <span>{name}</span>
+          </div>
+          <button className="copy-button">Copy</button>
+        </div>
+  
+        {showLink && linkMore() /* Como toda boxColor está configurada para copiar a cor, o stopPropagation evita que o evento se propgague */ }
+      </div>
+     </CopyToClipboard>
+    );
+  }; 
+};
+
       /*
         ColorBox  contains an unique color, 
         in addtion, "more"  wrapped inside span
@@ -36,27 +65,3 @@ export default class ColorBox  extends Component {
         //copy the text inse the text field
         navigator.clipboard.writeText(copyText.value); 
       */ 
-     <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-      <div className="ColorBox" style={{ background: background }}>
-
-        <div style={{background}} className={`copy-overlay ${copied && "show"}`}/>
-
-        <div className= {`copy-msg ${copied && "show"}`}>
-        <h1>COPIED!</h1>
-        <p>{background}</p>
-        </div>
-        <div className="copy-container">
-          <div className="box-content">
-            <span>{name}</span>
-          </div>
-          <button className="copy-button">Copy</button>
-        </div>
-        {/* Como toda boxColor está configurada para copiar a cor, o stopPropagation evita que o evento a */}
-        <Link to={moreUrl} onClick={(e)=> e.stopPropagation() }>
-          <span className="see-more">MORE</span>
-        </Link>
-      </div>
-     </CopyToClipboard>
-    );
-  }; 
-};
