@@ -28,27 +28,33 @@ class Navbar  extends Component {
   handleCloseSnackbar () {
     this.setState({open: false})
   }
+  
   render () {
-    const {level, changeLevel} = this.props;
+    const {level, changeLevel, isSingleColor } = this.props;
     const {format, open} = this.state;
+
+    const levelBar = () => (
+      <div className="slider-container">
+        <span>Level: {level}</span>
+        <div className='slider'>
+          <Slider 
+            className='rc-slider'
+            defaultValue={level} 
+            min={100}
+            max={900}
+            step={100}
+            onChange={changeLevel}
+          />
+        </div>   
+      </div>    
+    );
+
     return  (
       <header className="Navbar">
         <div className="logo">
           <a href="#">reactcolorpicker</a>
         </div>
-        <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className='slider'>
-            <Slider 
-              className='rc-slider'
-              defaultValue={level} 
-              min={100}
-              max={900}
-              step={100}
-              onChange={changeLevel}
-            />
-          </div>   
-        </div>
+        { isSingleColor && levelBar()}
         <div className="Select-container">
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem  value="hex">HEX-#ffff</MenuItem>
