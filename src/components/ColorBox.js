@@ -1,13 +1,30 @@
 import React, {Component} from "react";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from "react-router-dom";
+import injectSheet from 'react-jss';
 import chroma from 'chroma-js';
 import './ColorBox.css';
 
-export default class ColorBox  extends Component {
+const styles = {
+  ColorBox: {
+    height: props => (props.showingFullPalette ? "25%" : "50%"),
+    width: "20%",
+    margin: "0 auto",
+    display: "inline-block",
+    position: "relative",
+    cursor: "pointer",
+    marginBottom: "-4px",
+    "&:hover button": {
+      opacity: 1
+    }
+  },
+};
+
+
+class ColorBox  extends Component {
   constructor (props) {
     super(props);
-    this.state = { copied: false };
+    this.state = { copied: false};
     this.changeCopyState = this.changeCopyState.bind(this);
   }
   
@@ -17,10 +34,11 @@ export default class ColorBox  extends Component {
   };
 
   render () {
-    const { background, name, moreUrl, showLink } = this.props;
+    const { background, name, moreUrl, showingFullPalette, classes } = this.props;
+    console.log(classes)
     const { copied } = this.state;
     const isDarkColor = chroma(background).luminance() <= 0.08; 
-    const isLightColor = chroma(background).luminance() >= 0.6; 
+    const isLightColor = chroma(background).luminance() >= 0.4; 
 
     const linkMore = () => (
       <Link to={moreUrl} onClick={(e)=> e.stopPropagation() }>
@@ -31,7 +49,7 @@ export default class ColorBox  extends Component {
     return (
 
      <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-      <div className="ColorBox" style={{ background: background }}>
+      <div className={classes.ColorBox/*"ColorBox"*/} style={{ background: background }}>
         <div style={{background}} className={`copy-overlay ${copied && "show"}`}/>
 
         <div className= {`copy-msg ${copied && "show"}`}>
@@ -46,12 +64,16 @@ export default class ColorBox  extends Component {
           <button className={`copy-button ${isLightColor && "dark-text"}`}>Copy</button>
         </div>
   
-        {showLink && linkMore() /* Como toda boxColor está configurada para copiar a cor, o stopPropagation evita que o evento se propgague */ }
+        {showingFullPalette && linkMore() /* Como toda boxColor está configurada para copiar a cor, o stopPropagation evita que o evento se propgague */ }
       </div>
      </CopyToClipboard>
     );
   }; 
 };
+
+
+export default injectSheet(styles)(ColorBox);
+
 
       /*
         ColorBox  contains an unique color, 
