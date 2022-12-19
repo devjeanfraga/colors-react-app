@@ -3,7 +3,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from "react-router-dom";
 import styles from '../styles/ColorBoxStyles';
 import injectSheet from 'react-jss';
-import './ColorBox.css';
 
 
 class ColorBox  extends Component {

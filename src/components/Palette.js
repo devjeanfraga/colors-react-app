@@ -2,19 +2,8 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
+import styles from '../styles/PaletteStyles'; 
 import injectSheet from 'react-jss';
-import './Palette.css'; 
-
-const styles = {
-  Palette: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column"
-  },
-  colors: {
-    height: "90%"
-  }
-};
 
 class Palette extends Component {
   constructor (props) {

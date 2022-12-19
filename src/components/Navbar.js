@@ -6,7 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
 
 import "rc-slider/assets/index.css";
-import "./Navbar.css"; 
+import styles from "../styles/NavbarStyles";
+import injectSheet from 'react-jss';
 import Slider from 'rc-slider';
 
 class Navbar  extends Component {
@@ -30,13 +31,13 @@ class Navbar  extends Component {
   }
   
   render () {
-    const {level, changeLevel, isSingleColor } = this.props;
+    const {level, changeLevel, isSingleColor, classes } = this.props;
     const {format, open} = this.state;
 
     const levelBar = () => (
-      <div className="slider-container">
+      <div>
         <span>Level: {level}</span>
-        <div className='slider'>
+        <div className={classes.slider}>
           <Slider 
             className='rc-slider'
             defaultValue={level} 
@@ -50,12 +51,12 @@ class Navbar  extends Component {
     );
 
     return  (
-      <header className="Navbar">
-        <div className="logo">
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <a href="#">reactcolorpicker</a>
         </div>
         { isSingleColor && levelBar()}
-        <div className="Select-container">
+        <div className={classes.selectContainer}>
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem  value="hex">HEX-#ffff</MenuItem>
             <MenuItem  value="rgb">RGB-rgb(255,255,255)</MenuItem>
@@ -86,4 +87,4 @@ class Navbar  extends Component {
     );
   };
 };
-export default Navbar;
+export default injectSheet(styles)(Navbar);
