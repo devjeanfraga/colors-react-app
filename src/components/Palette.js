@@ -33,7 +33,7 @@ export default class Palette extends Component {
       id={color.id}
       paletteId={id}
       moreUrl={`${id}/${color.id}`}
-      showLink={true}
+      showingFullPalette={true}
     /> 
     ));
     return (
