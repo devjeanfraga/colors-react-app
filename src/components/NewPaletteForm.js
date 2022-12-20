@@ -9,10 +9,20 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ChromePicker } from 'react-color';
 
 
-const drawerWidth = 240;
+const drawerWidth = 400;
+const sx = {
+  width: drawerWidth,
+  flexShrink: 0,
+  '& .MuiDrawer-paper': {
+    width: drawerWidth,
+    boxSizing: 'border-box',
+  },
+};
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -71,6 +81,10 @@ export default function NewPaletteForm () {
     setOpen(false);
   };
 
+  const [curColor, setColor]= React.useState(['purple']); 
+
+  const changeColor = (newColor) => console.log(newColor);
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -90,33 +104,28 @@ export default function NewPaletteForm () {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
+
+      <Drawer sx={sx} variant="persistent" anchor="left" open={open}>
+
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
-
-        <Divider />
-
+        <Typography variant='h4'> Design your Palette </Typography>
+        <div>
+          <Button variant='contained' color='secondary'> Clear Palette </Button>
+          <Button variant='contained' color='primary'> Random Color </Button>
+        </div>
+        <ChromePicker color={curColor} onChangeComplete={changeColor}/>
+        <Button variant='contained' color='primary'> Add Color </Button>
       </Drawer>
+
       <Main open={open}>
         <DrawerHeader />
-
       </Main>
+
     </Box>
   );
 };
