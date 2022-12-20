@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button'
+import DraggableColorBox from './DraggableColorBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker } from 'react-color';
 
@@ -27,6 +28,7 @@ const sx = {
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    height: "calc(100vh - 64px)",
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -134,11 +136,9 @@ export default function NewPaletteForm () {
 
       <Main open={open}>
         <DrawerHeader />
-        <ul>
-          {colors.map(color => (
-            <li style={{backgroundColor: color}}>{color}</li>
-          ))}
-        </ul>
+        
+        {colors.map(color => (<DraggableColorBox color={color}> {color} </DraggableColorBox>))}
+       
       </Main>
 
     </Box>
