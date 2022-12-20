@@ -81,9 +81,12 @@ export default function NewPaletteForm () {
     setOpen(false);
   };
 
-  const [curColor, setColor]= React.useState(['purple']); 
+  const [colors, setColors] = React.useState(['#4285F4','#DB4437', '#F4B400', '#0F9D58']);
+  const [currentColor, setColor]= React.useState('#4285F4'); 
 
-  const changeColor = (newColor) => console.log(newColor);
+  const updateCurrentColor = (newColor) => setColor(newColor.hex);
+  const addNewColor = () => setColors([...colors, currentColor]); 
+  
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -118,12 +121,24 @@ export default function NewPaletteForm () {
           <Button variant='contained' color='secondary'> Clear Palette </Button>
           <Button variant='contained' color='primary'> Random Color </Button>
         </div>
-        <ChromePicker color={curColor} onChangeComplete={changeColor}/>
-        <Button variant='contained' color='primary'> Add Color </Button>
+        <ChromePicker color={currentColor} onChangeComplete={updateCurrentColor}/>
+        <Button 
+          variant='contained' 
+          color='primary' 
+          style={{backgroundColor: currentColor}} 
+          onClick={addNewColor}
+        > 
+          Add Color 
+        </Button>
       </Drawer>
 
       <Main open={open}>
         <DrawerHeader />
+        <ul>
+          {colors.map(color => (
+            <li style={{backgroundColor: color}}>{color}</li>
+          ))}
+        </ul>
       </Main>
 
     </Box>
