@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button'
 import DraggableColorBox from './DraggableColorBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from 'react-color';
 
 
@@ -71,9 +72,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+
 export default function NewPaletteForm () {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [newName, setNewName] = React.useState(""); 
+  const [colors, setColors] = React.useState([]);
+  const [currentColor, setColor]= React.useState('#4285F4'); 
+
+  useEffect(()=> {
+
+    //Check if all names are diff
+    ValidatorForm.addValidationRule("isColorNameUnique", value =>
+       colors.every(
+        ({ name }) => name.toLowerCase() !== value.toLowerCase()
+      )
+    );
+
+    //Check if all colors are diff
+    ValidatorForm.addValidationRule("isColorUnique", value =>
+     colors.every(({ color }) => color !== currentColor)
+    );
+  })
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -83,12 +103,20 @@ export default function NewPaletteForm () {
     setOpen(false);
   };
 
-  const [colors, setColors] = React.useState(['#4285F4','#DB4437', '#F4B400', '#0F9D58']);
-  const [currentColor, setColor]= React.useState('#4285F4'); 
-
-  const updateCurrentColor = (newColor) => setColor(newColor.hex);
-  const addNewColor = () => setColors([...colors, currentColor]); 
+  const updateCurrentColor = (newColor) => {
+    setColor(newColor.hex);
+  };
   
+  const addNewColor = () => {
+    let newColor = {color: currentColor, name: newName};
+    setColors([...colors, newColor]);
+    setNewName("");
+  }; 
+
+  const handleChangeNewName = (evt) => { 
+    setNewName(evt.target.value);
+  };
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -118,27 +146,33 @@ export default function NewPaletteForm () {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        
         <Typography variant='h4'> Design your Palette </Typography>
+
         <div>
           <Button variant='contained' color='secondary'> Clear Palette </Button>
           <Button variant='contained' color='primary'> Random Color </Button>
         </div>
+
         <ChromePicker color={currentColor} onChangeComplete={updateCurrentColor}/>
-        <Button 
-          variant='contained' 
-          color='primary' 
-          style={{backgroundColor: currentColor}} 
-          onClick={addNewColor}
-        > 
-          Add Color 
-        </Button>
+
+        <ValidatorForm onSubmit={addNewColor}>
+          <TextValidator
+            value={newName}
+            onChange={handleChangeNewName}
+            validators={["required", "isColorNameUnique", "isColorUnique"]}
+            errorMessages={["Enter a color name", "Color name must be unique", "Color already used!"]}
+          />
+          <Button  variant='contained' type='submit' color='primary' style={{backgroundColor: currentColor}}> 
+            Add Color 
+          </Button>
+        </ValidatorForm>
+
       </Drawer>
 
       <Main open={open}>
         <DrawerHeader />
-        
-        {colors.map(color => (<DraggableColorBox color={color}> {color} </DraggableColorBox>))}
-       
+        {colors.map(color => (<DraggableColorBox color={color.color} name={color.name}/>))}
       </Main>
 
     </Box>
