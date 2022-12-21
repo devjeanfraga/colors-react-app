@@ -75,26 +75,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function NewPaletteForm (props) {
   const theme = useTheme();
-  const  { savePalette } = props;
+  const  { savePalette, palettes } = props;
   const [open, setOpen] = React.useState(false);
-  const [newName, setNewName] = React.useState(""); 
+  const [colorName, setColorName] = React.useState(''); 
+  const [paletteName, setPaletteName] = React.useState('');
   const [colors, setColors] = React.useState([]);
-  const [currentColor, setColor]= React.useState('#4285F4'); 
+  const [currentColor, setCurrentColor]= React.useState('#4285F4'); 
 
   useEffect(()=> {
-
-    //Check if all names are diff
+    //Check if all color names are diff
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
        colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
+        ({ name }) => name.toLowerCase() !== value.toLowerCase())
     );
-
     //Check if all colors are diff
     ValidatorForm.addValidationRule("isColorUnique", value =>
      colors.every(({ color }) => color !== currentColor)
     );
-  })
+    //Check if all palette names are diff
+    ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
+        palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+    );
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,31 +107,36 @@ export default function NewPaletteForm (props) {
   };
 
   const updateCurrentColor = (newColor) => {
-    setColor(newColor.hex);
+    setCurrentColor(newColor.hex);
   };
   
   const addNewColor = () => {
-    let newColor = {name: newName, color: currentColor};
+    let newColor = {name: colorName, color: currentColor};
     setColors([...colors, newColor]);
-    setNewName("");
+    setColorName("");
   }; 
 
-  const handleChangeNewName = (evt) => { 
-    setNewName(evt.target.value);
+  const handleChangecolorName = (evt) => { 
+    setColorName(evt.target.value);
   };
+  
+  const handleChangePaletteName = (evt) => {
+    setPaletteName(evt.target.value); 
+  }
 
   const handleSubmitSavePalette = () => {
-    let newName = 'New Test Palette';
+    let newPaletteName = paletteName;
 
     let newPalette = {
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g,'-'),
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g,'-'),
       colors: colors
     };
 
     savePalette(newPalette);
     props.history.push('/'); 
-  }
+  };
+
 
 
   return (
@@ -149,9 +156,22 @@ export default function NewPaletteForm (props) {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
-          <Button variant='contained' color='primary' onClick={handleSubmitSavePalette}>
-            Save Palette
-          </Button>
+
+          <ValidatorForm onSubmit={handleSubmitSavePalette}>
+            <TextValidator
+              label='Palette Name'
+              value={paletteName}
+              name='newPaletteName'
+              onChange={handleChangePaletteName}
+              validators={['required', 'isPaletteNameUnique']}
+              errorMessages={['Enter Palette Name', 'Name already used']}
+            />
+            <Button type='submit'variant='contained' color='primary'>
+              Save Palette
+            </Button>
+          </ValidatorForm>
+
+
         </Toolbar>
       </AppBar>
 
@@ -175,8 +195,8 @@ export default function NewPaletteForm (props) {
 
         <ValidatorForm onSubmit={addNewColor}>
           <TextValidator
-            value={newName}
-            onChange={handleChangeNewName}
+            value={colorName}
+            onChange={handleChangecolorName}
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={["Enter a color name", "Color name must be unique", "Color already used!"]}
           />
