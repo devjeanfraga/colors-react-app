@@ -1,5 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss'
+import { SortableElement } from 'react-sortable-hoc';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const styles = {
@@ -34,7 +35,7 @@ const styles = {
   }
 };
 
-function DraggableColorBox (props) {
+const DraggableColorBox = SortableElement(props => {
   const {color, name, handleClick, classes} = props;
 
   return (
@@ -44,7 +45,7 @@ function DraggableColorBox (props) {
         <DeleteIcon className={classes.deleteIcon} onClick={handleClick}/>
       </div>
     </div>
+  )}
   );
-};
 
 export default injectSheet(styles)(DraggableColorBox); 

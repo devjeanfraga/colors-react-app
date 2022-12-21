@@ -10,13 +10,15 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button'
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList ';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from 'react-color';
+import { arrayMove } from 'react-sortable-hoc'; 
 
 
 const drawerWidth = 400;
+
 const sx = {
   width: drawerWidth,
   flexShrink: 0,
@@ -48,11 +50,11 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+    })(({ theme, open }) => ({
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -106,21 +108,6 @@ export default function NewPaletteForm (props) {
     setOpen(false);
   };
 
-  const updateCurrentColor = (newColor) => {
-    setCurrentColor(newColor.hex);
-  };
-  
-  const addNewColor = () => {
-    let newColor = {name: colorName, color: currentColor};
-    setColors([...colors, newColor]);
-    setColorName("");
-  }; 
-
-  const removeColor = (colorName) => {
-    let updatedColors = colors.filter(color =>  color.name !== colorName);
-    setColors(updatedColors);
-  };
-
   const handleChangecolorName = (evt) => { 
     setColorName(evt.target.value);
   };
@@ -140,6 +127,27 @@ export default function NewPaletteForm (props) {
     savePalette(newPalette);
     props.history.push('/'); 
   };
+
+  const addNewColor = () => {
+    let newColor = {name: colorName, color: currentColor};
+    setColors([...colors, newColor]);
+    setColorName("");
+  };
+  
+  const removeColor = (colorName) => {
+    let updatedColors = colors.filter(color =>  color.name !== colorName);
+    setColors(updatedColors);
+  };
+
+  const updateCurrentColor = (newColor) => {
+    setCurrentColor(newColor.hex);
+  };
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+      let updatedColors = arrayMove(colors, oldIndex, newIndex);
+      setColors(updatedColors); 
+  };
+
 
 
 
@@ -213,7 +221,12 @@ export default function NewPaletteForm (props) {
 
       <Main open={open}>
         <DrawerHeader />
-        {colors.map(color => (<DraggableColorBox color={color.color} name={color.name} handleClick={() => removeColor(color.name)}/>))}
+        <DraggableColorList
+          colors={colors}
+          removeColor={removeColor}
+          axis='xy'
+          onSortEnd={onSortEnd}
+        />
       </Main>
 
     </Box>
