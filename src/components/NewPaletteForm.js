@@ -75,8 +75,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function NewPaletteForm (props) {
+export default function NewPaletteForm ( props ) {
   const theme = useTheme();
+  const maxColors = 20; 
   const  { savePalette, palettes } = props;
   const [open, setOpen] = React.useState(false);
   const [colorName, setColorName] = React.useState(''); 
@@ -148,8 +149,18 @@ export default function NewPaletteForm (props) {
       setColors(updatedColors); 
   };
 
+  const clearColors = () => {
+    setColors([]); 
+  };
 
+  const addRandomColor = () => {
+    let allColors = palettes.map(p => p.colors).flat(); 
+    let randIndex = Math.floor( allColors.length * Math.random());
+    let randColor = allColors[randIndex]; 
+    setColors([...colors, randColor]); 
+  }; 
 
+  const isFullPalette = colors.length >= maxColors; 
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -199,8 +210,8 @@ export default function NewPaletteForm (props) {
         <Typography variant='h4'> Design your Palette </Typography>
 
         <div>
-          <Button variant='contained' color='secondary'> Clear Palette </Button>
-          <Button variant='contained' color='primary'> Random Color </Button>
+          <Button variant='contained' color='secondary' onClick={clearColors}> Clear Palette </Button>
+          <Button variant='contained' color='primary' onClick={addRandomColor} disabled={isFullPalette}> Random Color </Button>
         </div>
 
         <ChromePicker color={currentColor} onChangeComplete={updateCurrentColor}/>
@@ -212,8 +223,14 @@ export default function NewPaletteForm (props) {
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={["Enter a color name", "Color name must be unique", "Color already used!"]}
           />
-          <Button  variant='contained' type='submit' color='primary' style={{backgroundColor: currentColor}}> 
-            Add Color 
+          <Button  
+            variant='contained' 
+            type='submit' 
+            color='primary' 
+            disabled={isFullPalette} 
+            style={{backgroundColor: isFullPalette ? 'grey': currentColor }}
+          > 
+            { isFullPalette ? 'Palette Full': 'Add Color' } 
           </Button>
         </ValidatorForm>
 
