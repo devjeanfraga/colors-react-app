@@ -5,9 +5,6 @@ import injectSheet from 'react-jss';
 import MiniPalettes from "./MiniPalettes";
 
 class PaletteList extends Component {
-  constructor (props) {
-    super(props);
-  }
 
   goToPalette (id) {
     console.log("HI:rainbow:")

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'; 
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline'; 
 import MuiAppBar from '@mui/material/AppBar'; 
 import Toolbar from '@mui/material/Toolbar'; 
@@ -30,15 +30,16 @@ const AppBar = styled(MuiAppBar, {
 function PaletteFormNav (props) {
   const {palettes, handleSubmitSavePalette, handleDrawerOpen, open} = props;
   const [paletteName, setPaletteName] = React.useState('');
-  const handleChangePaletteName = (evt) => {
-    setPaletteName(evt.target.value); 
-  };
-
+  
   useEffect(()=> {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
     palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
     );
   });
+
+  const handleChangePaletteName = (evt) => {
+    setPaletteName(evt.target.value); 
+  };
 
   return (
     <div>

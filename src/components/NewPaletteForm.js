@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar'; 
 import Typography from '@mui/material/Typography'; 
 import IconButton from '@mui/material/IconButton'; 
 import Divider from '@mui/material/Divider';
@@ -56,7 +55,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function NewPaletteForm ( props ) {
-  const theme = useTheme();
   const maxColors = 20; 
   const  { savePalette, palettes } = props;
   const [open, setOpen] = React.useState(false);

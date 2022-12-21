@@ -3,7 +3,7 @@ import styles from '../styles/MiniPalettesStyles';
 import injectSheet from 'react-jss';
 
 function MiniPalettes (props) {
-  const {classes, paletteName, id, emoji, colors, handleClick} = props;
+  const {classes, paletteName, emoji, colors, handleClick} = props;
   const miniColorBoxes =  colors.map(color => (
     <div 
       className={classes.miniColor} 

@@ -53,7 +53,7 @@ class Navbar  extends Component {
     return  (
       <header className={classes.Navbar}>
         <div className={classes.logo}>
-          <a href="#">reactcolorpicker</a>
+          <a href="/">reactcolorpicker</a>
         </div>
         { isSingleColor && levelBar()}
         <div className={classes.selectContainer}>
