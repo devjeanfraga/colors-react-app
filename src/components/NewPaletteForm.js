@@ -73,8 +73,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function NewPaletteForm () {
+export default function NewPaletteForm (props) {
   const theme = useTheme();
+  const  { savePalette } = props;
   const [open, setOpen] = React.useState(false);
   const [newName, setNewName] = React.useState(""); 
   const [colors, setColors] = React.useState([]);
@@ -108,7 +109,7 @@ export default function NewPaletteForm () {
   };
   
   const addNewColor = () => {
-    let newColor = {color: currentColor, name: newName};
+    let newColor = {name: newName, color: currentColor};
     setColors([...colors, newColor]);
     setNewName("");
   }; 
@@ -117,11 +118,24 @@ export default function NewPaletteForm () {
     setNewName(evt.target.value);
   };
 
+  const handleSubmitSavePalette = () => {
+    let newName = 'New Test Palette';
+
+    let newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g,'-'),
+      colors: colors
+    };
+
+    savePalette(newPalette);
+    props.history.push('/'); 
+  }
+
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" color='default' open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -135,6 +149,9 @@ export default function NewPaletteForm () {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <Button variant='contained' color='primary' onClick={handleSubmitSavePalette}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
 

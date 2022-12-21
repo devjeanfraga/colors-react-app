@@ -1,12 +1,11 @@
 export default {
   root: {
     height: "100vh",
-    paddingBottom: "10%",
-    backgroundColor: "#394bad",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
-    overflow: "hidden"
+    backgroundColor: "#394bad",
+    overflow: "scroll",
   }, 
   container: {
     width: "50%",
@@ -14,10 +13,11 @@ export default {
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
+    marginBottom: "3%"
   },
   nav: {
-    width: "100%",
     display: "flex",
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     color: "white",
@@ -27,10 +27,9 @@ export default {
   },
   palettes: {
     boxSizing: "border-box",
-    
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "5%"
+    gridGap: "2.3rem"
   }
 };

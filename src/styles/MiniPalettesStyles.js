@@ -1,5 +1,7 @@
 export default {
   root: {
+    // width: "100%",
+    // height: "90%",
     backgroundColor: "white",
     border: "1px solid black",
     borderRadius: "5px",
@@ -26,12 +28,12 @@ export default {
     color: "black",
     paddingTop: "0.5rem",
     paddingBottom: "0.9rem",
-    fontSize: "0.8rem",
+    fontSize: "1rem",
     position: "relative"
   },
   emoji: {
     marginLeft: "0.5rem",
-    fontSize: "1.3rem"
+    fontSize: "1.5rem"
   },
   miniColor: {
     height: "25%",
