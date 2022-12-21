@@ -116,17 +116,21 @@ export default function NewPaletteForm (props) {
     setColorName("");
   }; 
 
+  const removeColor = (colorName) => {
+    let updatedColors = colors.filter(color =>  color.name !== colorName);
+    setColors(updatedColors);
+  };
+
   const handleChangecolorName = (evt) => { 
     setColorName(evt.target.value);
   };
   
   const handleChangePaletteName = (evt) => {
     setPaletteName(evt.target.value); 
-  }
+  };
 
   const handleSubmitSavePalette = () => {
     let newPaletteName = paletteName;
-
     let newPalette = {
       paletteName: newPaletteName,
       id: newPaletteName.toLowerCase().replace(/ /g,'-'),
@@ -209,7 +213,7 @@ export default function NewPaletteForm (props) {
 
       <Main open={open}>
         <DrawerHeader />
-        {colors.map(color => (<DraggableColorBox color={color.color} name={color.name}/>))}
+        {colors.map(color => (<DraggableColorBox color={color.color} name={color.name} handleClick={() => removeColor(color.name)}/>))}
       </Main>
 
     </Box>
