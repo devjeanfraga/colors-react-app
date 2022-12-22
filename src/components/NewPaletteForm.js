@@ -11,15 +11,37 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import PaletteFormNav from './PaletteFormNav';
 import { arrayMove } from 'react-sortable-hoc'; 
 import ColorPickerForm from './ColorPickerForm';
+import withStyles from 'react-jss';
+import { ClassNames } from '@emotion/react';
 
 const drawerWidth = 400;
+
+const styles = {
+  container: {
+    width: "90%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttons: {
+    width: "100%"
+  },
+  button: {
+    width: "50%"
+  }
+};
 
 const sx = {
   width: drawerWidth,
   flexShrink: 0,
+  height: "100vh",
   '& .MuiDrawer-paper': {
     width: drawerWidth,
-    boxSizing: 'border-box',
+    display: "flex",
+    alignItems: "center"
+    //boxSizing: 'border-box',
   },
 };
 
@@ -53,9 +75,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function NewPaletteForm ( props ) {
+function NewPaletteForm ( props ) {
   const maxColors = 20; 
-  const  { savePalette, palettes } = props;
+  const  { savePalette, palettes, classes } = props;
   const [open, setOpen] = React.useState(false);
   const [colors, setColors] = React.useState([]);
 
@@ -122,19 +144,20 @@ export default function NewPaletteForm ( props ) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        
-        <Typography variant='h4'> Design your Palette </Typography>
+        <div className={classes.container}>
+          <Typography variant='h4'> Design your Palette </Typography>
 
-        <div>
-          <Button variant='contained' color='secondary' onClick={clearColors}> Clear Palette </Button>
-          <Button variant='contained' color='primary' onClick={addRandomColor} disabled={isFullPalette}> Random Color </Button>
+          <div className={classes.buttons}>
+            <Button className={classes.button} variant='contained' color='secondary' onClick={clearColors}> Clear Palette </Button>
+            <Button className={classes.button} variant='contained' color='primary' onClick={addRandomColor} disabled={isFullPalette}> Random Color </Button>
+          </div>
+
+          <ColorPickerForm
+            colors={colors}
+            addNewColor={addNewColor} 
+            isFullPalette={isFullPalette}
+          />
         </div>
-
-        <ColorPickerForm
-          colors={colors}
-          addNewColor={addNewColor} 
-          isFullPalette={isFullPalette}
-        />
       </Drawer>
 
       <Main open={open}>
@@ -150,3 +173,5 @@ export default function NewPaletteForm ( props ) {
     </Box>
   );
 };
+
+export default withStyles(styles)(NewPaletteForm);
