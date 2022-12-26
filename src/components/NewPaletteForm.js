@@ -10,8 +10,9 @@ import DraggableColorList from './DraggableColorList ';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import PaletteFormNav from './PaletteFormNav';
 import { arrayMove } from 'react-sortable-hoc'; 
+import {arrayMoveImmutable} from 'array-move';
 import ColorPickerForm from './ColorPickerForm';
-import withStyles from 'react-jss';
+import {withStyles} from '@mui/styles'; 
 
 const drawerWidth = 400;
 
@@ -109,7 +110,7 @@ function NewPaletteForm ( props ) {
   };
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-      let updatedColors = arrayMove(colors, oldIndex, newIndex);
+      let updatedColors = arrayMoveImmutable(colors, oldIndex, newIndex);
       setColors(updatedColors); 
   };
 

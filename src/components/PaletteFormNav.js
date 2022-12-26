@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; 
+import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { withStyles } from '@mui/styles'; 
@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton'; 
 import MenuIcon from '@mui/icons-material/Menu'; 
 import Button from '@mui/material/Button';
-// import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import PaletteMetaForm from './PaletteMettaForm';
 
 const drawerWidth = 400;
@@ -17,9 +16,6 @@ const drawerWidth = 400;
 const styles = theme => ({
   root: {
     display: 'flex'
-  },
-  navBtns: {
-
   }
 }); 
 
@@ -28,11 +24,21 @@ const AppBar = styled(MuiAppBar, {
     })(({ theme, open }) => ({
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: 'center',
     height: "64px",
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    '& .navBtns': {
+      marginRight: "1rem",
+      "& a": {
+        textDecoration: "none"
+      },
+      '& .button': {
+        margin: "0 0.5rem"
+      }
+    },
 
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -46,60 +52,37 @@ const AppBar = styled(MuiAppBar, {
 
 function PaletteFormNav (props) {
   const {palettes, handleSubmitSavePalette, handleDrawerOpen, classes, open} = props;
-  // const [paletteName, setPaletteName] = React.useState('');
-  
-  // useEffect(()=> {
-  //   ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
-  //   palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
-  //   );
-  // });
+  const [formShowing, setFormShowing] = useState(false);
 
-  // const handleChangePaletteName = (evt) => {
-  //   setPaletteName(evt.target.value); 
-  // };
+  const showForm = () => setFormShowing(!formShowing);
+  
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" color='default' open={open}>
+        
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-          <MenuIcon />
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" sx={{ mr: 2, ...(open && { display: 'none' }) }}>
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Create a Palette
-          </Typography>
+          <Typography variant="h6" noWrap component="div"> Create a Palette </Typography>
         </Toolbar>
-          <div classeName={classes.navBtns}>
-            <PaletteMetaForm
-              palettes={palettes}
-              handleSubmit={handleSubmitSavePalette}
-            />
-            {/* <ValidatorForm onSubmit={ () => handleSubmitSavePalette(paletteName) }>
-              <TextValidator
-                label='Palette Name'
-                value={paletteName}
-                name='newPaletteName'
-                onChange={handleChangePaletteName}
-                validators={['required', 'isPaletteNameUnique']}
-                errorMessages={['Enter Palette Name', 'Name already used']}
-              />
-              <Button type='submit'variant='contained' color='primary'>
-                Save Palette
-              </Button>
-            </ValidatorForm> */}
-            <Link to='/'>
-              <Button variant='contained' color='secondary'>
-                Go Back
-              </Button>
-            </Link>
-          </div>
+          
+        <div className='navBtns'>
+
+          <Link to='/'>
+            <Button variant='contained' color='secondary' className='button'>
+              Go Back
+            </Button>
+          </Link>
+
+          <Button variant='contained' color='primary' onClick={showForm} className='button'>
+            Save
+          </Button>
+
+          { formShowing && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmitSavePalette} showForm={showForm}/> }
+        </div>
       </AppBar>
     </div> 
   );
