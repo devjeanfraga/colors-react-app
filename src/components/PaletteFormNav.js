@@ -8,8 +8,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography'; 
 import IconButton from '@mui/material/IconButton'; 
 import MenuIcon from '@mui/icons-material/Menu'; 
-import Button from '@mui/material/Button'
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import Button from '@mui/material/Button';
+// import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import PaletteMetaForm from './PaletteMettaForm';
 
 const drawerWidth = 400;
 
@@ -45,17 +46,17 @@ const AppBar = styled(MuiAppBar, {
 
 function PaletteFormNav (props) {
   const {palettes, handleSubmitSavePalette, handleDrawerOpen, classes, open} = props;
-  const [paletteName, setPaletteName] = React.useState('');
+  // const [paletteName, setPaletteName] = React.useState('');
   
-  useEffect(()=> {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
-    palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
-    );
-  });
+  // useEffect(()=> {
+  //   ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
+  //   palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+  //   );
+  // });
 
-  const handleChangePaletteName = (evt) => {
-    setPaletteName(evt.target.value); 
-  };
+  // const handleChangePaletteName = (evt) => {
+  //   setPaletteName(evt.target.value); 
+  // };
 
   return (
     <div className={classes.root}>
@@ -76,7 +77,11 @@ function PaletteFormNav (props) {
           </Typography>
         </Toolbar>
           <div classeName={classes.navBtns}>
-            <ValidatorForm onSubmit={ () => handleSubmitSavePalette(paletteName) }>
+            <PaletteMetaForm
+              palettes={palettes}
+              handleSubmit={handleSubmitSavePalette}
+            />
+            {/* <ValidatorForm onSubmit={ () => handleSubmitSavePalette(paletteName) }>
               <TextValidator
                 label='Palette Name'
                 value={paletteName}
@@ -88,7 +93,7 @@ function PaletteFormNav (props) {
               <Button type='submit'variant='contained' color='primary'>
                 Save Palette
               </Button>
-            </ValidatorForm>
+            </ValidatorForm> */}
             <Link to='/'>
               <Button variant='contained' color='secondary'>
                 Go Back

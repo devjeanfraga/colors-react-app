@@ -12,7 +12,6 @@ import PaletteFormNav from './PaletteFormNav';
 import { arrayMove } from 'react-sortable-hoc'; 
 import ColorPickerForm from './ColorPickerForm';
 import withStyles from 'react-jss';
-import { ClassNames } from '@emotion/react';
 
 const drawerWidth = 400;
 
