@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -78,8 +78,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function NewPaletteForm ( props ) {
   const maxColors = 20; 
   const  { savePalette, palettes, classes } = props;
-  const [open, setOpen] = React.useState(false);
-  const [colors, setColors] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [colors, setColors] = useState([]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,8 +105,7 @@ function NewPaletteForm ( props ) {
   };
   
   const removeColor = (colorName) => {
-    let updatedColors = colors.filter(color =>  color.name !== colorName);
-    setColors(updatedColors);
+    setColors(colors.filter(color => color.name !== colorName));
   };
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -164,9 +163,10 @@ function NewPaletteForm ( props ) {
         <DrawerHeader />
         <DraggableColorList
           colors={colors}
-          removeColor={removeColor}
+          deleteColor={removeColor}
           axis='xy'
           onSortEnd={onSortEnd}
+          distance={20}
         />
       </Main>
 
