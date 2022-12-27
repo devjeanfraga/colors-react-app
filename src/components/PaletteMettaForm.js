@@ -6,14 +6,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import data from '@emoji-mart/data'
+import Picker from "@emoji-mart/react";
+//import "emoji-mart/css/emoji-mart.css";
+
 
 
 function PaletteMetaForm (props) {
-  const {palettes, handleSubmit, showForm} = props;
+  const {palettes, handleSubmit, hidenForm} = props;
   const [paletteName, setPaletteName] = React.useState('');
   const [open, setOpen] = React.useState(true);
-
-
 
   useEffect(()=> {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value => 
@@ -31,7 +33,7 @@ function PaletteMetaForm (props) {
 
   const handleClose = () => {
     setOpen(!true);
-    showForm(); 
+    hidenForm(); 
   };
 
 
@@ -48,6 +50,7 @@ function PaletteMetaForm (props) {
         <Dialog
           open={open}
           onClose={handleClose}
+          aria-labelledby='form-dialog-title'
         >
           <DialogTitle id='form-dialog-title'>Choose your Palette Name</DialogTitle>
 
@@ -69,7 +72,7 @@ function PaletteMetaForm (props) {
                   Save Palette
                 </Button> */}
             </DialogContent>
-
+            <Picker data={data} theme='light'/>
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button variant='contained' color='primary' type='submit' onClick={handleClose}>Save Palette</Button>
