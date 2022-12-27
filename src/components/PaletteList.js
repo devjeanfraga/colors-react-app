@@ -12,7 +12,7 @@ class PaletteList extends Component {
   }
 
   render () {
-    const { palettes, classes  } = this.props;
+    const { palettes, classes, deletePalette } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -23,7 +23,7 @@ class PaletteList extends Component {
           </nav>
 
           <div className={classes.palettes}>
-            { palettes.map(palette => ( <MiniPalettes key={palette.id} {...palette} handleClick={()=>this.goToPalette(palette.id)}/> )) }
+            { palettes.map(palette => ( <MiniPalettes key={palette.id} id={palette.id} {...palette} handleDelete={deletePalette} handleClick={()=>this.goToPalette(palette.id)}/> )) }
           </div>
 
         </div>

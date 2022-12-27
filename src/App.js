@@ -10,6 +10,7 @@ import NewPaletteForm from "./components/NewPaletteForm";
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
+  
   const [palettes, setPalettes] = useState(savedPalettes || seedColors); 
 
   const findPalette = (id) => {
@@ -20,14 +21,19 @@ function App() {
     setPalettes([...palettes, newPalette]);
   };
 
+  const deletePalette = (id) => {
+    let updatedPalettes = palettes.filter(palette => palette.id !== id);
+    setPalettes(updatedPalettes);
+  };
+
   useEffect( () => {
     window.localStorage.setItem('palettes', JSON.stringify(palettes));
   }, [palettes]);
-  
+
   return (
     <Switch>
       <Route exact path="/palette/new" render={(routeProps)=> <NewPaletteForm savePalette={savePalette} palettes={palettes} {...routeProps}/>}/>
-      <Route exact path="/" render={(routeProps) => <PaletteList palettes={palettes} {...routeProps}/>} />
+      <Route exact path="/" render={(routeProps) => <PaletteList palettes={palettes} deletePalette={deletePalette} {...routeProps}/>} />
       <Route 
         exact 
         path="/palette/:paletteId" 
