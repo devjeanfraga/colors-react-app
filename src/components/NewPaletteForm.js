@@ -89,13 +89,9 @@ function NewPaletteForm ( props ) {
     setOpen(false);
   };
   
-  const handleSubmitSavePalette = (newPaletteName) => {
-    let newPalette = {
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g,'-'),
-      colors: colors
-    };
-
+  const handleSubmitSavePalette = (newPalette) => {
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g,'-');
+    newPalette.colors = colors;
     savePalette(newPalette);
     props.history.push('/'); 
   };
