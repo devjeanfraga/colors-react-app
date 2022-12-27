@@ -13,7 +13,6 @@ import Picker from "@emoji-mart/react";
 function PaletteMetaForm (props) {
   const {palettes, handleSubmit, hideForm} = props;
   const [paletteName, setPaletteName] = useState('');
-  const [open, setOpen] = useState(true);
   const [stage, setStage] = useState('form');   
 
   useEffect(()=> {
@@ -36,12 +35,7 @@ function PaletteMetaForm (props) {
     handleSubmit(newPalette); 
   }
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
   const handleClose = () => {
-    setOpen(!true);
     hideForm(); 
   };
 
