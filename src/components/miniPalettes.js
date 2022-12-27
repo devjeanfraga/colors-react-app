@@ -1,5 +1,6 @@
 import React from 'react'; 
 import styles from '../styles/MiniPalettesStyles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import injectSheet from 'react-jss';
 
 function MiniPalettes (props) {
@@ -14,6 +15,9 @@ function MiniPalettes (props) {
   ))
   return  (
     <div className={classes.root} onClick={handleClick}>
+      <div className={classes.delete}>
+        <DeleteIcon className={classes.deleteIcon} style={{ transition: "all 0.3s ease-in-out" }}/>
+      </div>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
