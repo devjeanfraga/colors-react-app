@@ -1,3 +1,4 @@
+import sizes from './diplay-sizes';
 import {DRAWER_WIDTH} from '../components/constants';
 const drawerWidth = DRAWER_WIDTH;
 
@@ -17,13 +18,20 @@ export const stylesAppBar = ({ theme, open }) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     '& .navBtns': {
-      marginRight: "1rem",
+      marginRight: "0.5rem",
       "& a": {
         textDecoration: "none"
       },
+      [sizes.down("sm")]: {
+        marginRight: "0.3rem"
+      },
       '& .button': {
-        margin: "0 0.5rem"
-      }
+        margin: "0 0.5rem",
+        [sizes.down("sm")]: {
+          margin: " 0 0.1rem",
+          padding: "0 0.2rem"
+        },
+      },
     },
 
   ...(open && {
