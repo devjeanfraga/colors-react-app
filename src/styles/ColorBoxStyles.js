@@ -15,12 +15,12 @@ export default {
       opacity: 1
     },
     [sizes.down("lg")]: {
-      height: props => (props.showingFullPalette ? "20%" : "50%"),
+      height: props => (props.showingFullPalette ? "20%" : "33.3333%"),
       width: "25%",
     },
 
     [sizes.down("md")]: {
-      height: props => (props.showingFullPalette ? "20%": "25%"),
+      height: props => (props.showingFullPalette ? "10%": "20%"),
       width: "50%"
     },
 
@@ -116,7 +116,10 @@ export default {
       textAlign: "center",
       marginBottom: "0",
       padding: "1rem",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
+      [sizes.down("xs")]: {
+        fontSize: "5rem" 
+      }
     },
     "& p": {
       fontSize: "2rem",
