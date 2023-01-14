@@ -1,4 +1,5 @@
 import sizes from './diplay-sizes';
+import bg from "./bg.svg";
 
 export default {
   root: {
@@ -7,6 +8,7 @@ export default {
     alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: "#394bad",
+    backgroundImage: `url(${bg})`,
     overflow: "scroll",
   }, 
   container: {
