@@ -1,3 +1,5 @@
+import sizes from './diplay-sizes';
+
 export default {
   root: {
     height: "100vh",
@@ -8,12 +10,23 @@ export default {
     overflow: "scroll",
   }, 
   container: {
-    width: "50%",
+    width: "60%",
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
-    marginBottom: "3%"
+    marginBottom: "3%",
+
+    [sizes.down("xxl")]: {
+      maxWidth: "812px",
+    },
+    [sizes.down("md")]: {
+      width: "80%"
+    },
+    [sizes.down("xs")]: {
+      width: "80%",
+      minWidth: "200px"
+    }
   },
   nav: {
     display: "flex",
@@ -23,13 +36,28 @@ export default {
     color: "white",
     "& a": {
       color: "white"
+    },
+    [sizes.down("xs")]: {
+      flexFlow: "column wrap",
+      justifyContent: "center",
+      lineHeight: "1rem",
+      marginBottom: "20px"
     }
   },
   palettes: {
     boxSizing: "border-box",
     width: "100%",
     display: "grid",
-    gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "2.3rem"
+    gridTemplateColumns: "repeat(3, 33.3333333%)",
+    gridGap: "1.5rem",
+    [sizes.down("md")]: {
+      gridTemplateColumns: "repeat(2, 50%)",
+      gridGap: "1.5rem",
+
+    },
+    [sizes.down("xs")]: {
+      gridTemplateColumns: "repeat(1, 100%)",
+      gridGap: "1rem"
+    }
   }
 };
