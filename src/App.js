@@ -10,8 +10,8 @@ import NewPaletteForm from "./components/NewPaletteForm";
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
-  
-  const [palettes, setPalettes] = useState(savedPalettes || seedColors); 
+
+  const [palettes, setPalettes] = useState(savedPalettes || seedColors);
 
   const findPalette = (id) => {
     return palettes.find( palette => palette.id === id); 
@@ -33,7 +33,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/palette/new" render={(routeProps)=> <NewPaletteForm savePalette={savePalette} palettes={palettes} {...routeProps}/>}/>
-      <Route exact path="/" render={(routeProps) => <PaletteList palettes={palettes} deletePalette={deletePalette} {...routeProps}/>} />
+      <Route exact path="/" render={(routeProps) => <PaletteList palettes={palettes} deletePalette={deletePalette}   {...routeProps}/>} />
       <Route 
         exact 
         path="/palette/:paletteId" 

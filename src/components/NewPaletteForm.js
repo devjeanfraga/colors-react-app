@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, createRef} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -35,6 +35,7 @@ function NewPaletteForm ( props ) {
   const handleSubmitSavePalette = (newPalette) => {
     newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g,'-');
     newPalette.colors = colors;
+    newPalette.nodeRef = createRef(null);
     savePalette(newPalette);
     props.history.push('/'); 
   };
@@ -57,6 +58,7 @@ function NewPaletteForm ( props ) {
   };
 
   const addRandomColor = () => {
+    console.log(palettes)
     let allColors = palettes.map(p => p.colors).flat(); 
     let randIndex = Math.floor( allColors.length * Math.random());
     let randColor = allColors[randIndex]; 
