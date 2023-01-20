@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { PureComponent } from "react";
 import  { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Link } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
@@ -15,13 +15,14 @@ import styles from '../styles/PaletteListStyles';
 import injectSheet from 'react-jss';
 import MiniPalettes from "./MiniPalettes";
 
-class PaletteList extends Component {
+class PaletteList extends PureComponent {
   constructor (props) {
     super(props);
     this.state = { openDeleteDialog: false, deletingId: "" }
     this.openDialog = this.openDialog.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.goToPalette = this.goToPalette.bind(this);
   };
 
   openDialog (id) {
@@ -56,14 +57,13 @@ class PaletteList extends Component {
           </nav>
 
             <TransitionGroup className={classes.palettes}>
-            { palettes.map(palette => ( 
+            { palettes.map(palette => (
              <CSSTransition key={palette.id} classNames='fade' timeout={2000}  >
                <MiniPalettes 
                   key={palette.id} 
                   id={palette.id} 
-                  // handleDelete={deletePalette}
                   openDialog={this.openDialog} 
-                  handleClick={()=>this.goToPalette(palette.id)}
+                  goToPalette={this.goToPalette}
                   {...palette} 
                /> 
              </CSSTransition> 
