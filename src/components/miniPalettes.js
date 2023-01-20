@@ -4,12 +4,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import injectSheet from 'react-jss';
 
 function MiniPalettes (props) {
-  const {classes, paletteName, emoji, colors, handleClick, handleDelete, id} = props;
+  const {classes, paletteName, emoji, colors, handleClick, openDialog, id} = props;
   
   const deletePalette = (evt) => {
-    evt.stopPropagation()
-    handleDelete(id);
-  }
+    evt.stopPropagation();
+    openDialog(id);
+  };
 
   const miniColorBoxes =  colors.map(color => (
     <div 
