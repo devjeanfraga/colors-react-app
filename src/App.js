@@ -7,7 +7,7 @@ import {generatePalette} from "./colorHelpers";
 import PaletteList from "./components/PaletteList";
 import SingleColorPalette from "./components/SingleColorPalette";
 import NewPaletteForm from "./components/NewPaletteForm";
-import "../src/styles/App.css";
+import Page from "./components/Page";
 
 
 function App() {
@@ -35,38 +35,38 @@ function App() {
   return (
     <Route render={({location})=> (
       <TransitionGroup>
-        <CSSTransition key={location.key} classNames='fade' timeout={500}>
+        <CSSTransition key={location.key} classNames='page' timeout={500}>
 
           <Switch location={location}>
             <Route exact path="/palette/new" render={(routeProps)=> (
-              <div className="page">
+              <Page>
                 <NewPaletteForm savePalette={savePalette} palettes={palettes} {...routeProps}/>
-              </div>
+              </Page>
             )}/>
 
             <Route exact path="/" render={(routeProps) => (
-              <div className="page">
+              <Page>
                 <PaletteList palettes={palettes} deletePalette={deletePalette}   {...routeProps}/>
-              </div>
+              </Page>
             )}/>
 
             <Route 
               exact 
               path="/palette/:paletteId" 
               render={(routeProps) => (
-              <div className="page">
+              <Page>
                 <Palette palette={generatePalette(findPalette(routeProps.match.params.paletteId))}/>
-              </div>
+              </Page>
               )} 
             />
 
             <Route exact path="/palette/:paletteId/:colorId" render={(routeProps) => (
-                <div className="page">
+                <Page>
                   <SingleColorPalette 
                   colorId={routeProps.match.params.colorId}
                   palette={generatePalette(findPalette(routeProps.match.params.paletteId))}
                   />
-                </div>
+                </Page>
                 )
               } 
             />

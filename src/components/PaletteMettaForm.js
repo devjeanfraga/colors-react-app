@@ -33,6 +33,7 @@ function PaletteMetaForm (props) {
     console.log(emoji); 
     let newPalette = { paletteName: paletteName, emoji: emoji.native };
     handleSubmit(newPalette); 
+    setStage(''); 
   }
 
   const handleClose = () => {
