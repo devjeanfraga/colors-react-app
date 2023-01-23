@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import  { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Link } from "react-router-dom";
+
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from '@mui/material/DialogTitle';
 import Avatar from '@mui/material/Avatar';
@@ -11,9 +12,11 @@ import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
 import Close from '@mui/icons-material/Close';
 import { red, blue } from '@mui/material/colors';
-import styles from '../styles/PaletteListStyles'; 
-import injectSheet from 'react-jss';
+
 import MiniPalettes from "./MiniPalettes";
+
+import injectSheet from 'react-jss';
+import styles from '../styles/PaletteListStyles'; 
 
 class PaletteList extends PureComponent {
   constructor (props) {

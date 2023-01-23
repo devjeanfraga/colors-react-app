@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'; 
-import Button from '@mui/material/Button'
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import styles from '../styles/ColorPickerFormStyles';
-import { withStyles } from '@mui/styles'; 
+import Button from '@mui/material/Button';
 import { ChromePicker } from 'react-color';
+
+import { withStyles } from '@mui/styles'; 
+import styles from '../styles/ColorPickerFormStyles';
 
 function ColorPickerForm (props) {
   const {colors, addNewColor, isFullPalette, classes} = props;
@@ -39,7 +40,7 @@ function ColorPickerForm (props) {
   return (
     <div>
       <ChromePicker color={currentColor} onChangeComplete={updateCurrentColor} className={classes.picker}/>
-      <ValidatorForm onSubmit={handleSubmit}>
+      <ValidatorForm onSubmit={handleSubmit} instantValidate={false}>
         <TextValidator
         className={classes.colorNameInput}
           value={colorName}

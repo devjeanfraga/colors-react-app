@@ -46,4 +46,4 @@ function getScale (hexColor, numberOfColors) {
     .scale(getRange(hexColor))
     .mode("lab")
     .colors(numberOfColors);
-} 
+};

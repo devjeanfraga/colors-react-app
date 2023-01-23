@@ -22,7 +22,7 @@ export const stylesAppBar = ({ theme, open }) => ({
       "& a": {
         textDecoration: "none"
       },
-      [sizes.down("sm")]: {
+      [sizes.down("md")]: {
         marginRight: "0.3rem"
       },
       '& .button': {

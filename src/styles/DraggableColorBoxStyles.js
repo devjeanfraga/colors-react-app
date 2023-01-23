@@ -24,11 +24,15 @@ export default {
     },
     [sizes.down("sm")]: {
       width: "100%",
-      height: "5%",
+      height: "5.5%",
+      "&:hover svg": {
+        color: "white",
+        transform: "scale(1.1)"
+      },
     }
   },
   boxContent: {
-    color: props => chroma(props.color).luminance() <= 0.08 ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.6)",
+    color: props => chroma(props.color).luminance() <= 0.08 ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
     position: "absolute",
     width: "100%",
     left: "0px",
@@ -39,11 +43,17 @@ export default {
     fontSize: "12px",
     display: "flex",
     justifyContent: "space-between",
+    alignItems: 'center',
     [sizes.down("sm")]: {
       bottom: "-10px",
     }
   },
   deleteIcon: {
-    transition: "all 0.3s ease-in-out"
+    transition: "all 0.3s ease-in-out",
+    paddingRight: '15px',
+    paddingBottom: '2px',
+    [sizes.down('xs')]: {
+      paddingLeft: '50px'
+    }
   }
 };

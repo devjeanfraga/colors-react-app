@@ -1,5 +1,5 @@
 import { DRAWER_WIDTH as drawerWidth} from '../components/constants';
-
+import sizes from './diplay-sizes';
 export const styles = {
   container: {
     width: "90%",
@@ -10,10 +10,12 @@ export const styles = {
     alignItems: "center"
   },
   buttons: {
-    width: "100%"
+    width: "100%",
+    display: 'flex',
+    justifyContent: 'space-evenly'
   },
   button: {
-    width: "50%"
+    width: "45%"
   }
 };
 
@@ -55,4 +57,7 @@ export const drawerHeaderStyles = ({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
+  [sizes.down('xs')]: {
+    padding: theme.spacing(0.2, 1),
+  }
 }); 

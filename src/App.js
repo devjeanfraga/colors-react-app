@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { TransitionGroup, CSSTransition} from 'react-transition-group'; 
-import seedColors from "./seed-colors";
-import Palette from "./components/Palette";
-import {generatePalette} from "./colorHelpers";  
-import PaletteList from "./components/PaletteList";
-import SingleColorPalette from "./components/SingleColorPalette";
-import NewPaletteForm from "./components/NewPaletteForm";
+
 import Page from "./components/Page";
+import Palette from "./components/Palette";
+import PaletteList from "./components/PaletteList";
+import NewPaletteForm from "./components/NewPaletteForm";
+import SingleColorPalette from "./components/SingleColorPalette";
+
+import seedColors from "./seed-colors";
+import { generatePalette } from "./colorHelpers";  
 
 
 function App() {
@@ -78,11 +80,6 @@ function App() {
     )}
     
     />
-
-    
-    // <div className="App">
-    //     <Palette palette={generatePalette(seedColors[6])}/>
-    // </div>
   );
 }
 

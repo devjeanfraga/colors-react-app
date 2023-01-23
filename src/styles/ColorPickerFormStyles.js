@@ -11,6 +11,7 @@ export default {
   },
   colorNameInput: {
     width: "100%",
-    height: "70px"
+    height: "80px",
+    marginBottom: '10px' 
   }
 };

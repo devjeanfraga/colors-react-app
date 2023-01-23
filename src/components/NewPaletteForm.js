@@ -1,16 +1,21 @@
 import React, {useState, createRef} from 'react';
-import { styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography'; 
 import IconButton from '@mui/material/IconButton'; 
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import DraggableColorList from './DraggableColorList ';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+
+import DraggableColorList from './DraggableColorList ';
 import PaletteFormNav from './PaletteFormNav';
-import {arrayMoveImmutable} from 'array-move';
 import ColorPickerForm from './ColorPickerForm';
+
+import seedColors from '../seed-colors';
+
+import { styled } from '@mui/material/styles';
+import {arrayMoveImmutable} from 'array-move';
 import {withStyles} from '@mui/styles'; 
 import  {styles, sx, mainStyles, drawerHeaderStyles } from '../styles/NewPaletteFormStyles';
 
@@ -22,7 +27,7 @@ function NewPaletteForm ( props ) {
   const maxColors = 20; 
   const  { savePalette, palettes, classes } = props;
   const [open, setOpen] = useState(false);
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState([...seedColors[0].colors]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -108,6 +113,7 @@ function NewPaletteForm ( props ) {
           axis='xy'
           onSortEnd={onSortEnd}
           distance={20}
+          
         />
       </Main>
 

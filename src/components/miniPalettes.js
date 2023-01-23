@@ -1,7 +1,7 @@
 import React from 'react'; 
-import styles from '../styles/MiniPalettesStyles';
-import DeleteIcon from '@mui/icons-material/Delete';
 import injectSheet from 'react-jss';
+import DeleteIcon from '@mui/icons-material/Delete';
+import styles from '../styles/MiniPalettesStyles';
 
 function MiniPalettes (props) {
   const {classes, paletteName, emoji, colors, goToPalette, openDialog, id} = props;

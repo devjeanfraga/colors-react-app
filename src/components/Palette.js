@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
+
 import styles from '../styles/PaletteStyles'; 
 import injectSheet from 'react-jss';
 

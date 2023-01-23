@@ -1,10 +1,12 @@
 import React, {Component} from "react"
 import { Link } from "react-router-dom";
-import ColorBox from "./ColorBox";
-import Navbar from "./Navbar";
-import PaletteFooter from "./PaletteFooter";
-import styles from '../styles/SingleColorPaletteStyles';
 import injectSheet from 'react-jss';
+
+import Navbar from "./Navbar";
+import ColorBox from "./ColorBox";
+import PaletteFooter from "./PaletteFooter";
+
+import styles from '../styles/SingleColorPaletteStyles';
 
 
 class SingleColorPalette extends Component {

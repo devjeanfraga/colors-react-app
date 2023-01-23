@@ -1,16 +1,17 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { withStyles } from '@mui/styles'; 
-import CssBaseline from '@mui/material/CssBaseline'; 
+
 import MuiAppBar from '@mui/material/AppBar'; 
 import Toolbar from '@mui/material/Toolbar'; 
 import Typography from '@mui/material/Typography'; 
 import IconButton from '@mui/material/IconButton'; 
-//import MenuIcon from '@mui/icons-material/Menu'; 
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import Button from '@mui/material/Button';
+
 import PaletteMetaForm from './PaletteMettaForm';
+
+import { withStyles } from '@mui/styles'; 
+import { styled } from '@mui/material/styles';
 import {styles, stylesAppBar} from '../styles/PaletteFormNavStyles';
 
 const AppBar = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open'} )( stylesAppBar );
