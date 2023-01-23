@@ -18,6 +18,7 @@ import { styled } from '@mui/material/styles';
 import {arrayMoveImmutable} from 'array-move';
 import {withStyles} from '@mui/styles'; 
 import  {styles, sx, mainStyles, drawerHeaderStyles } from '../styles/NewPaletteFormStyles';
+import { color } from '@mui/system';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })( mainStyles );
 const DrawerHeader = styled('div')( drawerHeaderStyles );
@@ -63,11 +64,16 @@ function NewPaletteForm ( props ) {
   };
 
   const addRandomColor = () => {
-    console.log(palettes)
     let allColors = palettes.map(p => p.colors).flat(); 
-    let randIndex = Math.floor( allColors.length * Math.random());
-    let randColor = allColors[randIndex]; 
-    setColors([...colors, randColor]); 
+    let isDuplicate = true;
+    let randomIndex;
+    let randomColor;
+    while (isDuplicate) {
+      randomIndex = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[randomIndex]; 
+      isDuplicate = colors.some(color => color.name === randomColor.name); 
+    };
+    setColors([...colors, randomColor]); 
   }; 
 
   const isFullPalette = colors.length >= maxColors; 
