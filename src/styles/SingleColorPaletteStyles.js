@@ -4,7 +4,10 @@ export default {
   Palette: {
     height: "100vh",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    [sizes.down("sm")]: {
+      overflow: 'auto'
+    }
   },
   colors: {
     height: "90%"
@@ -16,7 +19,7 @@ export default {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-3.5px",
+    marginBottom: "-4px",
     opacity: 1,
     backgroundColor: "black",
     "& a": {
