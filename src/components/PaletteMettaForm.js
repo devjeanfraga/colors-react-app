@@ -8,13 +8,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import useHandleChange from "../hooks/useFormState";
+
 import data from '@emoji-mart/data'
 import Picker from "@emoji-mart/react";
 
 
 function PaletteMetaForm (props) {
   const {palettes, handleSubmit, hideForm} = props;
-  const [paletteName, setPaletteName] = useState('');
+  // const [paletteName, setPaletteName] = useState('');
+  const [paletteName, handleChangePaletteName] = useHandleChange();
   const [stage, setStage] = useState('form');   
 
   useEffect(()=> {
@@ -23,9 +26,9 @@ function PaletteMetaForm (props) {
     );
   });
 
-  const handleChangePaletteName = (evt) => {
-    setPaletteName(evt.target.value);
-  };
+  // const handleChangePaletteName = (evt) => {
+  //   setPaletteName(evt.target.value);
+  // };
 
   const showEmojiPicker = () => {
     setStage('emoji');

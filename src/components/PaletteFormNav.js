@@ -9,6 +9,7 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import Button from '@mui/material/Button';
 
 import PaletteMetaForm from './PaletteMettaForm';
+import useFormShowing from '../hooks/useTernary';
 
 import { withStyles } from '@mui/styles'; 
 import { styled } from '@mui/material/styles';
@@ -18,10 +19,10 @@ const AppBar = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open'}
 
 function PaletteFormNav (props) {
   const {palettes, handleSubmitSavePalette, handleDrawerOpen, classes, open} = props;
-  const [formShowing, setFormShowing] = useState(false);
+  // const [formShowing, setFormShowing] = useState(false);
 
-  const showForm = () => setFormShowing(!formShowing);
-  
+  // const showForm = () => setFormShowing(!formShowing);
+  const [formShowing, showForm] = useFormShowing(); 
 
   return (
     <div className={classes.root}>
