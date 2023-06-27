@@ -1,5 +1,5 @@
 
-<h1 align='center'>🎨 React Color App</h1>
+<h1 align='center'>🎨 React Colors App</h1>
 <h2 align='center'>
   <img src="./assets/react-color-app.webp" alt="project-image" width='80%'/><br>
   <span>🔗</span><a href='https://colors-react-app-dusky.vercel.app'>Live Demo</a>
@@ -29,7 +29,7 @@ It is an application to create, store and collect color palettes. Helping profes
 ## ♻ How to Contribute
 
  ```bash
- $ git clone https://github.com/devjeanfraga/colors-react-app
+ $ git clone https://github.com/devjeanfraga/react-colors-app
  ```
 
  ```bash 
