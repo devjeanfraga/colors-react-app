@@ -1,30 +1,13 @@
-# React Palette-Colors🎨
+<h1 align='center'>🎨 React Color App</h1>
 
-## Tools🛠️
-  - React
-##  How To run this projects ? 
-  - 
 
-## HOME PAGE
+## 📘 About
 
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img3.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img1.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img2.png?raw=true)
+### It is an application to create, store and collect color palettes. Helping professionals manage color schemes in ideas and projects.
+<br>
+<br>
 
-## PALETTE PAGE
+## 🔨 Tools
 
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img4.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img5.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img6.png?raw=true)
-
-## SINGLE PALETTE COLOR PAGE
-
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img7.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img8.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img9.png?raw=true)
-
-## NEW PALETTE PAGE
-
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img10.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img11.png?raw=true)
-![image](https://github.com/JeanFragaJS/colors-react-app/blob/master/assets/img12.png?raw=true)
+- React
+- JavaScript
